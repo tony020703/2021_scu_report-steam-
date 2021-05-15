@@ -13,7 +13,9 @@ GPU: NVIDIA Tesla T4
 tensorflow-gpu==2.5.0  
 keras==2.4.3  
 
-最後經過[model_evaluation.py](https://github.com/tony020703/2021_scu_report-steam-/blob/main/model_evaluation.py)把結果得出的F1_Score視覺化。  
+驗證結果：
+方法使用F1_score對測試集進行評估。
+經過[model_evaluation.py](https://github.com/tony020703/2021_scu_report-steam-/blob/main/model_evaluation.py)把結果得出的F1_Score視覺化。  
 <img src="https://github.com/tony020703/2021_scu_report-steam-/blob/main/F1_score.png" width="500">
   
 結果：  
