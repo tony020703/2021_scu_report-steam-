@@ -107,9 +107,9 @@ def convolution():
     inn = layers.Input(shape=(MAX_LEN, wordembedding_size, 1))
     cnns = []
     for size in filter_sizes:
-        conv = layers.Conv2D(filters=filters, kernel_size=(size, wordembedding_size),
+        conv = layers.Conv2D(filters=filters, kernel_size=(size, wordembedding_size),    #卷積層
                             strides=1, padding='valid', activation='relu')(inn)
-        pool = layers.MaxPool2D(pool_size=(MAX_LEN-size+1, 1), padding='valid')(conv)
+        pool = layers.MaxPool2D(pool_size=(MAX_LEN-size+1, 1), padding='valid')(conv)    #池化層
         cnns.append(pool)
     outt = layers.concatenate(cnns)
 
@@ -121,7 +121,7 @@ def cnn_mulfilter():
         layers.Embedding(input_dim=MAX_WORDS, output_dim=wordembedding_size,input_length=MAX_LEN),
         layers.Reshape((MAX_LEN, wordembedding_size, 1)),
         convolution(),
-        layers.Flatten(),
+        layers.Flatten(),    #全連接層
         layers.Dense(10, activation='relu'),
         layers.Dropout(0.2),
         layers.Dense(1, activation='sigmoid')
