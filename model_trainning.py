@@ -12,10 +12,11 @@ from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 import os
 
 nltk.download('wordnet')
-MAX_WORDS=20000  
+MAX_WORDS=20000
 MAX_LEN=1000
 BATCH_SIZE=128
 filter_sizes=[3,4,5]
+filters=64
 wordembedding_size=50
 
 class datapreprocess:
@@ -90,19 +91,23 @@ class textembedding:
         filepath = "model/text_vector"
         model.save(filepath, save_format="tf")
         return ds_train
-    def transform(self,df_test):
+    def transform(self,df_test,shuffle_on=True):
         filepath = "model/text_vector"
         loaded_model = tf.keras.models.load_model(filepath)
         loaded_vectorizer = loaded_model.layers[0]
-        ds_test_raw=tf.data.Dataset.from_tensor_slices((df_test['detailed_description'].values,df_test[self.genre_train].values)).shuffle(len(df_test)).batch(BATCH_SIZE).prefetch(tf.data.experimental.AUTOTUNE)
+        if shuffle_on==True:
+            ds_test_raw=tf.data.Dataset.from_tensor_slices((df_test['detailed_description'].values,df_test[self.genre_train].values)).shuffle(len(df_test)).batch(BATCH_SIZE).prefetch(tf.data.experimental.AUTOTUNE)
+        else:
+            ds_test_raw=tf.data.Dataset.from_tensor_slices((df_test['detailed_description'].values,df_test[self.genre_train].values)).batch(len(df_test)).prefetch(tf.data.experimental.AUTOTUNE)
         ds_test = ds_test_raw.map(lambda text,label:(loaded_vectorizer(text),label)).prefetch(tf.data.experimental.AUTOTUNE)
         return ds_test
+
 
 def convolution():
     inn = layers.Input(shape=(MAX_LEN, wordembedding_size, 1))
     cnns = []
     for size in filter_sizes:
-        conv = layers.Conv2D(filters=64, kernel_size=(size, wordembedding_size),
+        conv = layers.Conv2D(filters=filters, kernel_size=(size, wordembedding_size),
                             strides=1, padding='valid', activation='relu')(inn)
         pool = layers.MaxPool2D(pool_size=(MAX_LEN-size+1, 1), padding='valid')(conv)
         cnns.append(pool)
