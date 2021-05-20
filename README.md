@@ -17,7 +17,8 @@ keras==2.4.3
 驗證結果：
 方法使用F1_score對測試集進行評估。  
 經過[model_evaluation.py](https://github.com/tony020703/2021_scu_report-steam-/blob/main/model_evaluation.py)把結果得出的F1_Score和Precision視覺化。  
-<img src="https://github.com/tony020703/2021_scu_report-steam-/blob/main/F1_score.png" width="500">
+<img src="https://github.com/tony020703/2021_scu_report-steam-/blob/main/F1_score.png" width="500">  
+<img src="https://github.com/tony020703/2021_scu_report-steam-/blob/main/Precision.png" width="500">
   
 結果：  
 從測試集的結果看出，在數據分佈不平衡的標籤中遊戲數量10以上的標籤能部分找到目標標籤，但在遊戲數量10以下的標籤未能有效分辨出來，在熱門標籤中不少的F1_Score也有0.5以上的表現，Early Access和Free to Play因為標籤性質比較特殊，所以比較不容易從文字中找出分類。
