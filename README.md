@@ -11,7 +11,7 @@
 Linux ubuntu 18.04  
 GPU: NVIDIA Tesla T4  16G  
 環境配置為： 
-python==3.7.10
+python==3.7.10  
 tensorflow-gpu==2.5.0  
 keras==2.4.3  
 
