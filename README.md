@@ -4,7 +4,7 @@
 [資料型態的視覺化](https://github.com/tony020703/2021_scu_report-steam-/blob/main/data_visualization.ipynb)
 
 這個實驗依照時間把數據分為訓練集和測試集，其中訓練集的數據在2018年10月(包含)之前，測試集的數據在2018年10月之後。  
-在經過[model_trainning.py](https://github.com/tony020703/2021_scu_report-steam-/blob/main/model_trainning.py)利用CNN對每個遊戲的介紹進行分類訓練。(本次以embdding size為50做為例子)  
+在經過[model_trainning.py](https://github.com/tony020703/2021_scu_report-steam-/blob/main/model_trainning.py)利用CNN對每個遊戲的介紹進行分類訓練。(本次以word embedding size為50做為例子)  
 由於數據中1個遊戲的標籤可以是1個或多個，所以以多個二元分類進行分類預測。
 
 電腦配置為：  
